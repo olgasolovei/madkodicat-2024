@@ -1,0 +1,45 @@
+@startuml
+
+' Інтерфейс Команди
+interface Command {
+    +execute()
+}
+
+' Конкретні Команди
+class SendAlertCommand implements Command {
+    +execute()
+}
+
+class BlockEquipmentCommand implements Command {
+    +execute()
+}
+
+class GenerateReportCommand implements Command {
+    +execute()
+}
+
+' Клас Виконавця команд
+class Receiver {
+    +performAlert()
+    +performBlock()
+    +generateReport(´
+}
+
+' Менеджер команд (Invoker)
+class Invoker {
+    -command: Command
+    +setCommand(cmd: Command)
+    +run()
+}
+
+' Взаємодії між об'єктами
+Invoker --> Command : "викликає"
+SendAlertCommand ..|> Command
+BlockEquipmentCommand ..|> Command
+GenerateReportCommand ..|> Command
+
+SendAlertCommand --> Receiver : "викликає performAlert()"
+BlockEquipmentCommand --> Receiver : "викликає performBlock()"
+GenerateReportCommand --> Receiver : "викликає generateReport()"
+
+@enduml
